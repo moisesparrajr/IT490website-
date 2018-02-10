@@ -8,7 +8,7 @@ body{
 }
 
 input[type=text], select {
-    width: 20%;
+    width: 50%;
     padding: 12px 20px;
     margin: 8px 0;
     display: inline-block;
@@ -16,25 +16,29 @@ input[type=text], select {
     border-radius: 4px;
     box-sizing: border-box;
 }
-input[type=email], select{
-	width: 20%;
+input[type=email ], select {
+    width: 50%;
     padding: 12px 20px;
     margin: 8px 0;
     display: inline-block;
     border: 1px solid #ccc;
     border-radius: 4px;
     box-sizing: border-box;
+}
+m.message {
+	width: 70%;
+    padding: 0px 0px;
+    display: inline-block;
+    box-sizing: border-box; ;
 }
 
-input[type=text], select{
-	width: 50%;
-    padding: 12px 20px;
-    margin: 8px 0;
-    display: inline-block;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    box-sizing: border-box;
+textarea{
+    resize: none;
+    font-size:12;
+    font-family: myFirstFont;
 }
+
+
 </style>
 </head>
 <body>
@@ -42,7 +46,7 @@ input[type=text], select{
 <h1> CONTACT US</h1>
 <input type="email" placeholder="Email" name="Email" required><br>
 <br><input type="text" placeholder="Topic" name="Topic" required><br>
-<br><input type="text" placeholder="Message" name="Message" required><br>
+<br><textarea rows="20" cols="60"><m class="message"><input type="text" placeholder="Message" name="Message" form="usrform" required></e><br></textarea><br>
 <input type="submit" value="submit">
 </center>
 </body>
