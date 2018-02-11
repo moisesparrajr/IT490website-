@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html>
-<title>Contact us</title>
+<title>Contact Us</title>
 <head>
 <style>
 body{
@@ -8,6 +8,8 @@ body{
 }
 
 input[type=text], select {
+    font-family:Helvetica;
+    font-size: 15px;
     width: 50%;
     padding: 12px 20px;
     margin: 8px 0;
@@ -17,6 +19,8 @@ input[type=text], select {
     box-sizing: border-box;
 }
 input[type=email ], select {
+    font-family: Helvetica;
+    font-size: 15px;
     width: 50%;
     padding: 12px 20px;
     margin: 8px 0;
@@ -26,18 +30,41 @@ input[type=email ], select {
     box-sizing: border-box;
 }
 m.message {
-	width: 70%;
+	width: 100%;
     padding: 0px 0px;
     display: inline-block;
-    box-sizing: border-box; ;
+    box-sizing: border-box; 
 }
 
 textarea{
     resize: none;
-    font-size:12;
-    font-family: myFirstFont;
+    font-family: Helvetica;
+    font-size: 15px;
+    width: 50%;
+    padding: 12px 20px;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
 }
 
+.button{
+    background-color: green;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+}
+
+}
 
 </style>
 </head>
@@ -46,8 +73,9 @@ textarea{
 <h1> CONTACT US</h1>
 <input type="email" placeholder="Email" name="Email" required><br>
 <br><input type="text" placeholder="Topic" name="Topic" required><br>
-<br><textarea rows="20" cols="60"><m class="message"><input type="text" placeholder="Message" name="Message" form="usrform" required></e><br></textarea><br>
-<input type="submit" value="submit">
+<p><font size ="3"></font></p>
+<br><textarea rows="20" cols="57" placeholder="Message" form="usrform" required></p></textarea><br>
+<br><button class="button"> Send </button>
 </center>
 </body>
 </html>
