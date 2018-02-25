@@ -1,0 +1,36 @@
+<html>
+	
+	<head><script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script></head>
+	
+	<body>
+
+	<div style="padding: 20px">
+	<img src="https://web.njit.edu/~as2569/download/lime-cat.jpg" style="width:300px;height:200px;"><br>
+	<img id="thumbnail_0" style="width:300px;height:200px;"><br>
+	<img id="thumbnail_1" style="width:300px;height:200px;"><br>
+	<img id="thumbnail_2" style="width:300px;height:200px;"><br>
+	<img id="thumbnail_3" style="width:300px;height:200px;"><br>
+	</div>
+	
+	<script>
+	var response = $.ajax({
+		url: 'https://api.twitch.tv/kraken/streams/?game=League%20of%20Legends',
+		async: false,
+		dataType: 'JSON',
+		headers: {
+		'Client-ID': 'bz4bwfixqvekm7bq9n0ebu9rbeds6l'
+		}
+		}).responseJSON;
+	
+	console.log(response);
+	
+	for(i = 0; i < 4; i++)
+	{
+		var obj = response.streams[i].preview.large;
+	
+		document.getElementById("thumbnail_" + i).src = obj;
+	}
+	</script>
+	
+	</body>
+</html>
