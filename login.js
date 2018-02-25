@@ -1,12 +1,14 @@
-
-function login($user, $password)
+function loginClick($in_user, $in_pass)
 {
-	var response = $.ajax({
-		url : "auth.php",
-		type : "POST",
-		data : {"action":"authenticate","user":$user,"password":$password},	
-		dataType: "json",
-		}).responseJSON;
-
+	console.log("user is ", $in_user);
+	console.log("pass is ", $in_pass);
+	
+	 var response = $.ajax({
+		url : 'send.php',
+		type : 'POST',
+		data: {'action': 'authenticate', 'user':'theuser', 'password':'thepassword'},
+		datatype: "json",
+	});
+	
 	console.log(response);
 }
