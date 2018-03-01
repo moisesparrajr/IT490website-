@@ -1,12 +1,53 @@
 <!DOCTYPE html>
 <html>
 <head>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	<title>Twitch Viewer Page</title>
 </head>
 <style>
-	
+body{
+	background-color: black;
+}
+  .btn{
+    background-color: green;
+    float:right;
+  }
+textarea{
+    resize: none;
+    font-family: Helvetica;
+    font-size: 15px;
+    width: 40%;
+    padding: 7px 15px;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+.topnav a, .topnav input[type=text], .topnav .search-container button {
+    float: none;
+    display: block;
+    text-align: left;
+    width: 100%;
+    margin: 0;
+    padding: 14px;
+  }
+.search-container button {
+  float: right;
+  padding: 6px 10px;
+  margin-top: 8px;
+  margin-right: 16px;
+  background: #ddd;
+  font-size: 17px;
+  border: none;
+  cursor: pointer;
+}
+.topnav .search-container {
+  float: right;
+}
 </style>
 <body>
+<button type="submit"><i class="fa fa-search"></i></button><textarea rows="1" cols="1" form="usrform"></textarea>
 
+      
 </body>
 </html>

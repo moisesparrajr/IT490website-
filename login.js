@@ -1,3 +1,7 @@
+function login()
+{
+	loginClick(document.getElementById("email"),document.getElementById("password"));
+}
 function loginClick($in_user, $in_pass)
 {
 	console.log("user is ", $in_user);
