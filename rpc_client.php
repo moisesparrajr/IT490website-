@@ -3,6 +3,7 @@
 require_once __DIR__ . '/vendor/autoload.php';
 use PhpAmqpLib\Connection\AMQPStreamConnection;
 use PhpAmqpLib\Message\AMQPMessage;
+use \Firebase\JWT\JWT;
 
 if($_POST["action"] == "authenticate")
 {
@@ -14,7 +15,14 @@ if($_POST["action"] == "authenticate")
 	$rpc_confirm = new RpcSend();
 	$response = $rpc_confirm->call($dataToSend);
 	echo " [.] Got ", $response, "\n";
-	
+	//echo $response;
+}
+
+function validJWT($token)
+{
+	$key = "secretKey";
+	$decoded = JWT::decode($token, $key);
+	return $decoded;
 }
 
 class RpcSend {
