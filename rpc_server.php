@@ -19,22 +19,28 @@ function genJWT($userDataArr)
 	return JWT::encode($payload, $key);
 }
 
-function validJWT($input_token)
+function validJWT($input_token, $input_id)
 {
         $key = "secretKey";
         $decoded = JWT::decode($input_token, $key, array('HS256'));
 	print_r($decoded);
-        return $decoded;
+	if($decoded->{"id"} == $input_id)
+	{
+		return true;
+	}
 }
 
-function validate($n) {
+function validate($n)
+{
 	$userData = explode(' ', $n);
 	if($userData[0]=="user" && $userData[1]=="pass")
 	{
 		echo " login OK\n";
 		$token = genJWT($userData);
-		validJWT($token);
-		return $token;
+		if(validJWT($token, $userData[0]))
+		{
+			return $token;
+		}
 	}
 	else
 	{
