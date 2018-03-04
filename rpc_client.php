@@ -14,8 +14,8 @@ if($_POST["action"] == "authenticate")
 	
 	$rpc_confirm = new RpcSend();
 	$response = $rpc_confirm->call($dataToSend);
-	echo " [.] Got ", $response, "\n";
-	//echo $response;
+	//echo " [.] Got ", $response, "\n";
+	echo $response;
 }
 
 function validJWT($token)
@@ -50,7 +50,7 @@ class RpcSend {
 		$this->response = null;
 		$this->corr_id = uniqid();
 		$msg = new AMQPMessage(
-			$data,
+			(string) $data,
 			array('correlation_id' => $this->corr_id,
 			      'reply_to' => $this->callback_queue)
 			);
@@ -58,7 +58,7 @@ class RpcSend {
 		while(!$this->response) {
 			$this->channel->wait();
 		}
-		return intval($this->response);
+		return $this->response;
 	}
 };
 

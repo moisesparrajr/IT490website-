@@ -19,13 +19,21 @@ function genJWT($userDataArr)
 	return JWT::encode($payload, $key);
 }
 
+function validJWT($input_token)
+{
+        $key = "secretKey";
+        $decoded = JWT::decode($input_token, $key, array('HS256'));
+	print_r($decoded);
+        return $decoded;
+}
+
 function validate($n) {
 	$userData = explode(' ', $n);
 	if($userData[0]=="user" && $userData[1]=="pass")
 	{
 		echo " login OK\n";
 		$token = genJWT($userData);
-		//echo $token;
+		validJWT($token);
 		return $token;
 	}
 	else
@@ -41,7 +49,7 @@ $callback = function($req) {
 	$r = validate($req->body);
 	echo $r;
 	$msg = new AMQPMessage(
-		$r,
+		(string) $r,
 		array('correlation_id' => $req->get('correlation_id'))
 		);
 	$req->delivery_info['channel']->basic_publish(

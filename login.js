@@ -4,11 +4,12 @@ function loginClick($in_user, $in_pass)
 	console.log("pass is ", $in_pass);
 	
 	 var response = $.ajax({
-		url : 'send.php',
+		url : 'rpc_client.php',
 		type : 'POST',
-		data: {'action': 'authenticate', 'user':'theuser', 'password':'thepassword'},
-		datatype: "json",
+		data: {'action': 'authenticate', 'user':$in_user, 'password':$in_pass},
+		datatype: "text",
+		success: function(data){
+			console.log(data);
+		}
 	});
-	
-	console.log(response);
 }
