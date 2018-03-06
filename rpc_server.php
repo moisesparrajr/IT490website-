@@ -10,7 +10,8 @@ $channel->queue_declare('rpc_queue', false, false, false, false);
 
 function genJWT($userDataArr)
 {
-	$key = "secretKey";
+	$cache = parse_ini_file("key.ini");
+	$key = $cache['key'];
 	$payload = array(
 		"id" => $userDataArr[0],
 		"exp" => time() + (60 * 60)

@@ -14,7 +14,6 @@ if($_POST["action"] == "authenticate")
 	
 	$rpc_confirm = new RpcSend();
 	$response = $rpc_confirm->call($dataToSend);
-	//echo " [.] Got ", $response, "\n";
 	echo $response;
 }
 
