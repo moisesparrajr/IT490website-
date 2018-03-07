@@ -38,7 +38,10 @@ function validate($n)
 	$userData = explode(' ', $n);
 	if(count($userData) == 2)
 	{
-		if($userData[0]=="user" && $userData[1]=="pass")
+		echo " Attempting login\n";
+		$loginQ = "SELECT * FROM Users WHERE email='$userData[0]' AND password='$userData[1]'";
+		$result = $link->query($loginQ);
+		if($result->num_rows > 0)
 		{
 			echo " Login OK\n";
 			$token = genJWT($userData);
@@ -51,6 +54,41 @@ function validate($n)
 		{
 			echo " Login failed\n";
 		}
+	}
+	if(count($userData) == 3)
+	{
+		echo " Attempting signup\n";
+		$signupQuser = "SELECT * FROM Users WHERE email='$userData[0]'";
+                $resultUser = $link->query($signupQuser);
+		$signupQtwitch = "SELECT * FROM Users WHERE twitchID='$userData[2]'";
+                $resultTwitch = $link->query($signupQtwitch);
+		
+		if($resultUser->num_rows > 0 || $resultTwitch->num_rows > 0)
+		{
+			echo " Signup failed\n";
+		}
+                else
+                {
+                        echo " Signup OK\n";
+			
+			$insertQ = "INSERT INTO Users (email, password, twitchID) VALUES ('$userData[0]', '$userData[1]', '$userData[2]')";
+			if($link->query($insertQ) === TRUE)
+			{
+				echo " Insert OK\n";
+			}
+			else
+			{
+				echo " Insert failed: " . $insertQ . "<br>" . $link->error;
+				return;
+			}
+
+                        $token = genJWT($userData);
+                        if(validJWT($token, $userData[0]))
+                        {
+                                return $token;
+                        }
+                }
+
 	}
 }
 

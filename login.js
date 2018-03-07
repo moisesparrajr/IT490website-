@@ -15,9 +15,34 @@ function loginClick($in_user, $in_pass)
 			var jc  = getCookie("jwt");
 			console.log(uc);
 			console.log(jc);
+			location.href = "home.html";
 		}
 	});
 }
+
+function signupClick($in_user, $in_pass, $in_twitch)
+{
+        console.log("user is ", $in_user);
+        console.log("pass is ", $in_pass);
+	console.log("twitch ID is", $in_twitch);
+
+        var response = $.ajax({
+                url : 'rpc_client.php',
+                type : 'POST',
+                data: {'action': 'signup', 'user':$in_user, 'password':$in_pass, 'twitchID':$in_twitch},
+                datatype: "text",
+                success: function(data){
+                        document.cookie = "id=" + $in_user + ";";
+                        document.cookie = "jwt=" + data + ";";
+                        var uc = getCookie("id");
+                        var jc  = getCookie("jwt");
+                        console.log(uc);
+                        console.log(jc);
+			alert("Signup successful");
+                }
+        });
+}
+
 
 function getCookie(cname) {
     var name = cname + "=";

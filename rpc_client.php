@@ -17,6 +17,19 @@ if($_POST["action"] == "authenticate")
 	echo $response;
 }
 
+if($_POST["action"] == "signup")
+{
+        $name = $_POST["user"];
+        $password = $_POST["password"];
+	$twitchID = $_POST["twitchID"];
+
+        $dataToSend = $name . ' ' . $password . ' ' . $twitchID;
+
+        $rpc_confirm = new RpcSend();
+        $response = $rpc_confirm->call($dataToSend);
+        echo $response;
+}
+
 function validJWT($token)
 {
 	$key = "secretKey";
