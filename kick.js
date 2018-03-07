@@ -1,4 +1,4 @@
- var uc = getCookie("id");
+var uc = getCookie("id");
 var jc  = getCookie("jwt");
 
 	$.ajax({
