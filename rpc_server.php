@@ -1,8 +1,10 @@
 <?php
+
 require_once __DIR__ . '/vendor/autoload.php';
 use PhpAmqpLib\Connection\AMQPStreamConnection;
 use PhpAmqpLib\Message\AMQPMessage;
 use \Firebase\JWT\JWT;
+include 'connect.php';
 
 $connection = new AMQPStreamConnection('localhost', 5672, 'guest', 'guest');
 $channel = $connection->channel();
@@ -24,7 +26,6 @@ function validJWT($input_token, $input_id)
 {
         $key = "secretKey";
         $decoded = JWT::decode($input_token, $key, array('HS256'));
-	print_r($decoded);
 	if($decoded->{"id"} == $input_id)
 	{
 		return true;
@@ -33,28 +34,31 @@ function validJWT($input_token, $input_id)
 
 function validate($n)
 {
+	$link = connectDB();
 	$userData = explode(' ', $n);
-	if($userData[0]=="user" && $userData[1]=="pass")
+	if(count($userData) == 2)
 	{
-		echo " login OK\n";
-		$token = genJWT($userData);
-		if(validJWT($token, $userData[0]))
+		if($userData[0]=="user" && $userData[1]=="pass")
 		{
-			return $token;
+			echo " Login OK\n";
+			$token = genJWT($userData);
+			if(validJWT($token, $userData[0]))
+			{
+				return $token;
+			}
 		}
-	}
-	else
-	{
-		echo " login failed\n";
+		else
+		{
+			echo " Login failed\n";
+		}
 	}
 }
 
-echo " [x] Awaiting RPC requests \n"; 
+echo " [x] Awaiting RPC requests\n"; 
 
 $callback = function($req) {
-	echo " validating on server side \n ";
+	echo " Processing on server side\n";
 	$r = validate($req->body);
-	echo $r;
 	$msg = new AMQPMessage(
 		(string) $r,
 		array('correlation_id' => $req->get('correlation_id'))
