@@ -38,7 +38,7 @@ function signupClick($in_user, $in_pass, $in_twitch)
                         var jc  = getCookie("jwt");
                         console.log(uc);
                         console.log(jc);
-			alert("Signup successful");
+			location.href = "home.html";
                 }
         });
 }
