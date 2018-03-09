@@ -11,7 +11,7 @@ function updateLolData()
 	$sql = "SELECT personalID, summonerName FROM Users WHERE accountID IS NULL OR lastActivity < NOW() - INTERVAL 1 HOUR";
 	$result = $link->query($sql);
 	
-	echo "Num rows " . $result->num_rows . "\n";
+	echo " Num rows " . $result->num_rows . "\n";
 
 	if(!$result){
 		trigger_error('SQL Error: ' . $link->error);
@@ -21,7 +21,7 @@ function updateLolData()
 	{
 		while($row = $result->fetch_assoc())
 		{
-        		echo "personalID " . $row["personalID"] . " summonerName " . $row["summonerName"] . "\n";
+        		echo " personalID " . $row["personalID"] . " summonerName " . $row["summonerName"] . "\n";
                 	$summonerData = getSummonerByName($row["summonerName"]);
 			if($summonerData != null)
 			{
@@ -37,11 +37,25 @@ function updateLolData()
 				
 				if(count($data) == 0) //if result is empty object
 				{
-					$insertLolEmpty = "INSERT LoL_Data (rank, summonerLvl, accountId) VALUES (0, " . $summonerData->{"summonerLevel"} . ", " . $summonerData->{"accountId"} .");"; 
+					echo " No data, INSERT UPDATE rank, lvl, accountID\n";
+					$insertLolEmpty = "INSERT LoL_Data (rank, summonerLvl, accountId) VALUES (0, " . $summonerData->{"summonerLevel"} . ", " . $summonerData->{"accountId"} .") ON DUPLICATE KEY UPDATE rank=0, summonerLvl=" . $summonerData->{"summonerLevel"} . ";"; 
+					//echo $insertLolEmpty;
 					$insertLolEmpty_result = $lolLink->query($insertLolEmpty);
 					if(!$insertLolEmpty_result){
-                                  	      trigger_error('Insert empty to LOL Error: ' . $lolLink->error);
+                                  		trigger_error("Insert empty to LOL Error: " . $lolLink->error);
                                 	}
+				}
+				else
+				{
+					//echo "size " . count($data);
+					echo " INSERT UPDATE to LoL_Data\n";
+					$insertLol = "INSERT LoL_Data (rank, wins, losses, veteran, inactive, playerOrTeamName, playerOrTeamID, leaguePoints, summonerLvl, accountID) VALUES (".$data->{"rank"}.", ".$data->{"wins"}.", ".$data->{"losses"}.", ".$data->{"veteran"}.", ".$data->{"inactive"}.", ".$data->{"playerOrTeamName"}.", ".$data->{"playerOrTeamID"}.", ".$data->{"leaguePoints"}.", ".$data->{"summonerLevel"}.", "
+							.$summonerData->{"accountId"}.";";
+					//echo $insertLol;
+					$insertLol_result = $lolLink->query($insertLol);
+					if(!insertLol_result){
+						trigger_error("Insert to LOL Error: " . $lolLink->error);
+					}
 				}
 			}
         	}
@@ -71,9 +85,9 @@ function getSummonerByName($name)
 	$results = json_decode($result_string);
 
 	//hit API stop
-	//var_dump($results);
+	var_dump($results);
 	if(!property_exists($results, "accountId") && !property_exists($results, "id"))
-		echo "failure\n";
+		echo " failure\n";
 	else
 		return $results;
 	return null;
@@ -81,7 +95,7 @@ function getSummonerByName($name)
 
 function getSummonerData($id)
 {
-	echo "input id " . $id . "\n";
+	echo " input id " . $id . "\n";
 	//hit API start
 	$curl = curl_init();
 	$key_ini = parse_ini_file("apikey.ini");
@@ -94,26 +108,17 @@ function getSummonerData($id)
 	curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
 
 	$result_string = curl_exec($curl);
-	$status = curl_getinfo($curl, CURLINFO_HTTP_CODE);
-	echo "status " . $status . "\n";
-	//var_dump($result_string);
+	//$status = curl_getinfo($curl, CURLINFO_HTTP_CODE);
+	//echo "status " . $status . "\n";
 	if(curl_error($curl))
 	{
 		echo "error " . curl_error($curl);
+		return null;
 	}
-
 	curl_close($curl);
 	$results = json_decode($result_string);
-	//echo "results " . $results . "\n";
-	//echo "result count " . count($results);
-	//hit API stop
 	var_dump($results);
 	return $results;
-	//if(!property_exists($results, "id"))
-	//	echo "failure\n";
-	//else
-	//	return $results;
-	//return null;
 }
 
 //query bs
