@@ -100,7 +100,9 @@
 
 <script>
         var response = callTwitch();
-        console.log(response);
+	var response2 = dbTwitch();
+
+        console.log(response2);
         for(i = 0; i < 9; i++)
         {
                 var obj = response.streams[i].preview.medium;

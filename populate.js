@@ -11,3 +11,16 @@ function callTwitch()
 	
 	return response;
 }
+
+function dbTwitch()
+{
+	var ids = $.ajax({
+		url: 'populate.php',
+		type: 'POST',
+		dataType: 'text',
+		data: {'action':'twitch'},
+		success: 
+	});
+
+	return ids;
+}
