@@ -27,10 +27,10 @@ function updateLolData()
 			{
 				$insertIDS = "UPDATE Users SET accountID=".$summonerData->{"accountId"}.", summonerID=".$summonerData->{"id"}." WHERE personalID=".$row["personalID"].";";
 				//echo $insertIDS;
-				//$insertIDS_Result = $link->query($insertIDS);
-				//if(!$insertIDS_Result){
-				//	trigger_error('Insert IDs Error: ' . $link->error);
-				//}
+				$insertIDS_Result = $link->query($insertIDS);
+				if(!$insertIDS_Result){
+					trigger_error('Insert IDs Error: ' . $link->error);
+				}
 				
 				$data = getSummonerData($summonerData->{"id"});
 				$lolLink = connectLol();
@@ -49,11 +49,13 @@ function updateLolData()
 				{
 					//echo "size " . count($data);
 					echo " INSERT UPDATE to LoL_Data\n";
-					$insertLol = "INSERT LoL_Data (rank, wins, losses, veteran, inactive, playerOrTeamName, playerOrTeamID, leaguePoints, summonerLvl, accountID) VALUES (".$data->{"rank"}.", ".$data->{"wins"}.", ".$data->{"losses"}.", ".$data->{"veteran"}.", ".$data->{"inactive"}.", ".$data->{"playerOrTeamName"}.", ".$data->{"playerOrTeamID"}.", ".$data->{"leaguePoints"}.", ".$data->{"summonerLevel"}.", "
-							.$summonerData->{"accountId"}.";";
-					//echo $insertLol;
+//					$insertLol = "INSERT INTO LoL_Data (rank, wins, losses, veteran, inactive, playerOrTeamName, playerOrTeamID, leaguePoints, summonerLvl, accountID) VALUES (".$data[0]->{"rank"}.", ".$data[0]->{"wins"}.", ".$data[0]->{"losses"}.", 0, 0, ".$data[0]->{"playerOrTeamName"}.", ".$data[0]->{"playerOrTeamId"}.", ".$data[0]->{"leaguePoints"}.", ".$summonerData->{"summonerLevel"}.", ".$summonerData->{"accountId"}.") ON DUPLICATE KEY UPDATE rank='".$data[0]->{"rank"}."', wins='".$data[0]->{"wins"}."', losses='".$data[0]->{"losses"}."', playerOrTeamName='".$data[0]->{"playerOrTeamName"}."', playerOrTeamId='".$data[0]->{"playerOrTeamId"}."', leaguePoints='".$data[0]->{"leaguePoints"}."', summonerLvl='".$summonerData->{"summonerLevel"}."';";
+
+					$insertLol = "REPLACE INTO LoL_Data (rank, wins, losses, veteran, inactive, playerOrTeamName, playerOrTeamID, leaguePoints, summonerLvl, accountID) VALUES ('".$data[0]->{"rank"}."', ".$data[0]->{"wins"}.", ".$data[0]->{"losses"}.", 0, 0,'".$data[0]->{"playerOrTeamName"}."', ".$data[0]->{"playerOrTeamId"}.", ".$data[0]->{"leaguePoints"}.", ".$summonerData->{"summonerLevel"}.", ".$summonerData->{"accountId"}.");";
+
+					echo $insertLol;
 					$insertLol_result = $lolLink->query($insertLol);
-					if(!insertLol_result){
+					if(!$insertLol_result){
 						trigger_error("Insert to LOL Error: " . $lolLink->error);
 					}
 				}
@@ -78,14 +80,13 @@ function getSummonerByName($name)
 	//curl_setopt($curl, CURL_USERAGENT);
 	curl_setopt($curl, CURLOPT_URL, $url);
 	curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
-
 	$result_string = curl_exec($curl);
-
+	$status = curl_getinfo($curl, CURLINFO_HTTP_CODE);
+        echo " status " . $status . "\n";
 	curl_close($curl);
 	$results = json_decode($result_string);
-
+	//var_dump($results);
 	//hit API stop
-	var_dump($results);
 	if(!property_exists($results, "accountId") && !property_exists($results, "id"))
 		echo " failure\n";
 	else
@@ -108,11 +109,11 @@ function getSummonerData($id)
 	curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
 
 	$result_string = curl_exec($curl);
-	//$status = curl_getinfo($curl, CURLINFO_HTTP_CODE);
-	//echo "status " . $status . "\n";
+	$status = curl_getinfo($curl, CURLINFO_HTTP_CODE);
+	echo "status " . $status . "\n";
 	if(curl_error($curl))
 	{
-		echo "error " . curl_error($curl);
+		echo " error " . curl_error($curl);
 		return null;
 	}
 	curl_close($curl);
