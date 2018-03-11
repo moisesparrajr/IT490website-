@@ -61,8 +61,8 @@ function getCookie(cname) {
 }
 
 function deleteAllCookies() {
-	console.log("deleting cookies");
-   	var cookies = document.cookie.split(";");
+	 console.log("deleting cookies");
+   	 var cookies = document.cookie.split(";");
 
    	 for (var i = 0; i < cookies.length; i++) {
        		 var cookie = cookies[i];

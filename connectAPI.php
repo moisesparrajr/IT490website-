@@ -1,6 +1,7 @@
 
 <?php
 
+//returns connection to p_LeagueDB
 function connectDB()
 {
         echo " Attempting connection to Users\n";
@@ -23,6 +24,7 @@ function connectDB()
         }
 }
 
+//returns connection to LoL_Data
 function connectLol()
 {
         echo " Attempting connection to LolDB\n";

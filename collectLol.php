@@ -1,6 +1,7 @@
+#!/usr/bin/php
 <?php
 
-include 'connectAPI.php';
+include 'connect.php';
 
 updateLolData();
 
@@ -8,7 +9,7 @@ function updateLolData()
 {
 	$link = connectDB();
 
-	$sql = "SELECT personalID, summonerName FROM Users WHERE accountID IS NULL OR lastActivity < NOW() - INTERVAL 1 HOUR";
+	$sql = "SELECT personalID, summonerName FROM Users WHERE accountID IS NULL OR lastActivity < NOW() - INTERVAL 1 HOUR LIMIT 5";
 	$result = $link->query($sql);
 	
 	echo " Num rows " . $result->num_rows . "\n";
@@ -33,7 +34,7 @@ function updateLolData()
 				}
 				
 				$data = getSummonerData($summonerData->{"id"});
-				$lolLink = connectLol();
+				$lolLink = connectDB();
 				
 				if(count($data) == 0) //if result is empty object
 				{
@@ -47,13 +48,10 @@ function updateLolData()
 				}
 				else
 				{
-					//echo "size " . count($data);
 					echo " INSERT UPDATE to LoL_Data\n";
-//					$insertLol = "INSERT INTO LoL_Data (rank, wins, losses, veteran, inactive, playerOrTeamName, playerOrTeamID, leaguePoints, summonerLvl, accountID) VALUES (".$data[0]->{"rank"}.", ".$data[0]->{"wins"}.", ".$data[0]->{"losses"}.", 0, 0, ".$data[0]->{"playerOrTeamName"}.", ".$data[0]->{"playerOrTeamId"}.", ".$data[0]->{"leaguePoints"}.", ".$summonerData->{"summonerLevel"}.", ".$summonerData->{"accountId"}.") ON DUPLICATE KEY UPDATE rank='".$data[0]->{"rank"}."', wins='".$data[0]->{"wins"}."', losses='".$data[0]->{"losses"}."', playerOrTeamName='".$data[0]->{"playerOrTeamName"}."', playerOrTeamId='".$data[0]->{"playerOrTeamId"}."', leaguePoints='".$data[0]->{"leaguePoints"}."', summonerLvl='".$summonerData->{"summonerLevel"}."';";
-
+					//$insertLol = "INSERT INTO LoL_Data (rank, wins, losses, veteran, inactive, playerOrTeamName, playerOrTeamID, leaguePoints, summonerLvl, accountID) VALUES (".$data[0]->{"rank"}.", ".$data[0]->{"wins"}.", ".$data[0]->{"losses"}.", 0, 0, ".$data[0]->{"playerOrTeamName"}.", ".$data[0]->{"playerOrTeamId"}.", ".$data[0]->{"leaguePoints"}.", ".$summonerData->{"summonerLevel"}.", ".$summonerData->{"accountId"}.") ON DUPLICATE KEY UPDATE rank='".$data[0]->{"rank"}."', wins='".$data[0]->{"wins"}."', losses='".$data[0]->{"losses"}."', playerOrTeamName='".$data[0]->{"playerOrTeamName"}."', playerOrTeamId='".$data[0]->{"playerOrTeamId"}."', leaguePoints='".$data[0]->{"leaguePoints"}."', summonerLvl='".$summonerData->{"summonerLevel"}."';";
 					$insertLol = "REPLACE INTO LoL_Data (rank, wins, losses, veteran, inactive, playerOrTeamName, playerOrTeamID, leaguePoints, summonerLvl, accountID) VALUES ('".$data[0]->{"rank"}."', ".$data[0]->{"wins"}.", ".$data[0]->{"losses"}.", 0, 0,'".$data[0]->{"playerOrTeamName"}."', ".$data[0]->{"playerOrTeamId"}.", ".$data[0]->{"leaguePoints"}.", ".$summonerData->{"summonerLevel"}.", ".$summonerData->{"accountId"}.");";
-
-					echo $insertLol;
+					//echo $insertLol;
 					$insertLol_result = $lolLink->query($insertLol);
 					if(!$insertLol_result){
 						trigger_error("Insert to LOL Error: " . $lolLink->error);
@@ -110,7 +108,7 @@ function getSummonerData($id)
 
 	$result_string = curl_exec($curl);
 	$status = curl_getinfo($curl, CURLINFO_HTTP_CODE);
-	echo "status " . $status . "\n";
+	echo " status " . $status . "\n";
 	if(curl_error($curl))
 	{
 		echo " error " . curl_error($curl);
@@ -118,18 +116,10 @@ function getSummonerData($id)
 	}
 	curl_close($curl);
 	$results = json_decode($result_string);
-	var_dump($results);
+//	var_dump($results);
 	return $results;
 }
 
-//query bs
-//QUERY: select personalID, summonerName from Users where summonerID=NULL OR lastActivty < NOW() - INTERVAL 1 HOUR;
-
-//$updateList =json_decode($query);
-
-//for each enrty within query up to rate limiter, query for fresh data
-
 ///lol/summoner/v3/summoner/{summonerAccount}
 ///lol/match/v3/matchlists/by_account/{summonerID}
-//} 
 ?>
