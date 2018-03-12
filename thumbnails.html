@@ -7,6 +7,10 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script src="login.js"></script>
+  <script src="kick.js"></script>
+  <script src="populate.js"></script>
+
 </head>
 <style>
   body{
@@ -14,6 +18,9 @@
   }
   h2{
     color: white;
+  }
+  .btn{
+    background-color: green;
   }
   .footer{
     position: fixed;
@@ -37,7 +44,7 @@
 </style>
 <body>
 <div class="header">
- <span class="btn1"><button class ="btn">stream pages </button></span> <button class ="btn">stats</button> <button class = "btn">account</button>
+ <span class="btn1"><button onclick="location.href='home.html'"class ="btn">home</button></span> <button onclick="location.href='stats.html'"class ="btn">stats</button>
 </div>
 <div class="header2">
   
@@ -55,26 +62,26 @@
 
       <div class="item active">
        <div class = "row">   
-        <img src="la.jpg" alt="test1" style="width:100%;">
-        <img src="la.jpg" alt="test2" style="width:100%;">
-        <img src="la.jpg" alt="test3" style="width:100%;">
+        <img id="t_0" src="la.jpg" alt="test1" style="width:20%;">
+        <img id="t_1" src="la.jpg" alt="test2" style="width:20%;">
+        <img id="t_2" src="la.jpg" alt="test3" style="width:20%;">
        </div>
       </div>
 
       <div class="item">
         <div class = "row ">
-        <img src="la.jpg" alt="test1" style="width:100%;">
-        <img src="la.jpg" alt="test2" style="width:100%;">
-        <img src="la.jpg" alt="test3" style="width:100%;">
+        <img id="t_3" src="la.jpg" alt="test1" style="width:20%;">
+        <img id="t_4" src="la.jpg" alt="test2" style="width:20%;">
+        <img id="t_5" src="la.jpg" alt="test3" style="width:20%;">
         </div>
 
       </div>
     
       <div class="item">
         <div class = "row">
-        <img src="la.jpg" alt="test1" style="width:100%;">
-        <img src="la.jpg" alt="test2" style="width:100%;">
-        <img src="la.jpg" alt="test3" style="width:100%;">
+        <img id="t_6" src="la.jpg" alt="test1" style="width:20%;">
+        <img id="t_7" src="la.jpg" alt="test2" style="width:20%;">
+        <img id="t_8" src="la.jpg" alt="test3" style="width:20%;">
       </div>
       </div>
     </div>
@@ -90,6 +97,20 @@
   </div>
 </div>
 </center>
+
+<script>
+        var response = callTwitch();
+	var response2 = dbTwitch();
+
+        console.log(response2);
+        for(i = 0; i < 9; i++)
+        {
+                var obj = response.streams[i].preview.medium;
+                document.getElementById("t_" + i).src = obj;
+        }
+
+</script>
+
 <br>
 <br>
 <br>
@@ -104,6 +125,6 @@
 <br>
 <br>
 <br>
-<div class ="footer"><button class ="btn">contact us</button></div></div>
+<div class ="footer"><button onclick="location.href='contact.html'"class ="btn">contact us</button></div></div>
 </body>
 </html>

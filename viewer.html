@@ -1,8 +1,12 @@
 <!DOCTYPE html>
 <html>
+<title>Viewer</title>
 <head>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="login.js"></script>
+<script src="kick.js"></script>
 <style>
 * {box-sizing: border-box;}
 
@@ -87,8 +91,8 @@ font-size: 17px;
 <body>
 
 <div class="topnav">
-  <a href="#streamer">Streamer View</a>
-  <a href="#contact">Account</a>
+  <Button onclick="location.href='home.html'">Home</Button>
+  <Button onclick="location.href='stats.html'">Stats</Button>
   <div class="search-container">
       <input type="text" placeholder="Search.." name="search">
       <button type="submit"><i class="fa fa-search"></i></button>
@@ -123,7 +127,7 @@ font-size: 17px;
 <br>
 <br>
 <div class ="topnav">
-<a href="#contact"> Contact us </a>
+<Button onclick="location.href='contact.html'">Contact us</Button>
 </div>
 </body>
 </html>
