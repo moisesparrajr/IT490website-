@@ -105,7 +105,7 @@
         for(i = 0; i < 9; i++)
         {	
 		var obj = response.streams[i].preview.medium;
-		var link = "stream.html?streamer=" + response.streams[i].channel.name + "&url=" + response.streams[i].channel.url;
+		var link = response.streams[i].channel.url;
                 document.getElementById("t_" + i).src = obj;
 		document.getElementById("link_" + i).href = link;
         }

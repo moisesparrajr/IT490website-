@@ -28,5 +28,7 @@ function requestFromDb()
 			return result;
 			}
 		});
+
+	return response;
 }
 
