@@ -39,15 +39,21 @@ function validate($n)
 	if(count($userData) == 2)
 	{
 		echo " Attempting login\n";
-		$loginQ = "SELECT * FROM Users WHERE email='$userData[0]' AND password='$userData[1]'";
+		$loginQ = "SELECT * FROM Users WHERE email='$userData[0]';";
 		$result = $link->query($loginQ);
 		if($result->num_rows > 0)
 		{
-			echo " Login OK\n";
-			$token = genJWT($userData);
-			if(validJWT($token, $userData[0]))
+			$row = mysqli_fetch_assoc($result);
+			if(password_verify($userData[1], $row["password"]))
 			{
-				return $token;
+				echo " Login OK\n";
+				$token = genJWT($userData);
+				if(validJWT($token, $userData[0]))
+				{
+					return $token;
+				}
+			}else{
+				echo "Login failed\n";
 			}
 		}
 		else
@@ -71,7 +77,7 @@ function validate($n)
                 {
                         echo " Signup OK\n";
 			
-			$insertQ = "INSERT INTO Users (email, password, twitchID) VALUES ('$userData[0]', '$userData[1]', '$userData[2]')";
+			$insertQ = "INSERT INTO Users (email, password, twitchID) VALUES ('$userData[0]', '".password_hash($userData[1], PASSWORD_DEFAULT)."', '$userData[2]')";
 			if($link->query($insertQ) === TRUE)
 			{
 				echo " Insert OK\n";

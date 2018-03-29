@@ -37,7 +37,7 @@ body{
     var para = parseURLParams(window.location.href);
 	
     document.getElementById("streamButton").onclick = function () {
-        location.href = para["url"];
+        location.href = "/viewer.html?streamer=" + para["streamer"];
     };
 </script>
 
