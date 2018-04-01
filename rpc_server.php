@@ -5,8 +5,11 @@ use PhpAmqpLib\Connection\AMQPStreamConnection;
 use PhpAmqpLib\Message\AMQPMessage;
 use \Firebase\JWT\JWT;
 include 'connect.php';
+include 'db_producer.php';
 
-$connection = new AMQPStreamConnection('localhost', 5672, 'guest', 'guest');
+$ip_info = parse_ini_file("rpcIP.ini");
+$ip_addr = $ip_info["rpc_ip"];
+$connection = new AMQPStreamConnection($ip_addr, 5672, 'guest', 'guest');
 $channel = $connection->channel();
 $channel->queue_declare('rpc_queue', false, false, false, false);
 
@@ -40,11 +43,14 @@ function validate($n)
 	{
 		echo " Attempting login\n";
 		$loginQ = "SELECT * FROM Users WHERE email='$userData[0]';";
-		$result = $link->query($loginQ);
-		if($result->num_rows > 0)
+
+		$result = send_query($loginQ);
+		$resultObj = json_decode($result, true);
+		print_r($resultObj);
+
+		if($resultObj > 0) 
 		{
-			$row = mysqli_fetch_assoc($result);
-			if(password_verify($userData[1], $row["password"]))
+			if(password_verify($userData[1], $resultObj[0]["password"]))
 			{
 				echo " Login OK\n";
 				$token = genJWT($userData);
@@ -65,11 +71,19 @@ function validate($n)
 	{
 		echo " Attempting signup\n";
 		$signupQuser = "SELECT * FROM Users WHERE email='$userData[0]'";
-                $resultUser = $link->query($signupQuser);
+                //$resultUser = $link->query($signupQuser);
+		$resultUser = send_query($signupQuser);
+                $resultObjU = json_decode($resultUser, true);
+                print_r($resultObjU);
+
 		$signupQtwitch = "SELECT * FROM Users WHERE twitchID='$userData[2]'";
-                $resultTwitch = $link->query($signupQtwitch);
+                //$resultTwitch = $link->query($signupQtwitch);
+		$resultTwitch = send_query($signupQtwitch);
+		$resultObjT = json_decode($resultTwitch, true);
+		print_r($resultObjT);
 		
-		if($resultUser->num_rows > 0 || $resultTwitch->num_rows > 0)
+		//if($resultUser->num_rows > 0 || $resultTwitch->num_rows > 0)
+		if(count($resultObjU) > 1 || count($resultObjT) > 1) 
 		{
 			echo " Signup failed\n";
 		}
@@ -78,13 +92,18 @@ function validate($n)
                         echo " Signup OK\n";
 			
 			$insertQ = "INSERT INTO Users (email, password, twitchID) VALUES ('$userData[0]', '".password_hash($userData[1], PASSWORD_DEFAULT)."', '$userData[2]')";
-			if($link->query($insertQ) === TRUE)
+			//if($link->query($insertQ) === TRUE)
+			$insertResult = send_query($insertQ);
+			$insertResultObj = json_decode($insertResult, true);
+			print_r($insertResultObj);
+
+			if($insertResultObj === TRUE)
 			{
 				echo " Insert OK\n";
 			}
 			else
 			{
-				echo " Insert failed: " . $insertQ . "<br>" . $link->error;
+				echo " Insert failed: " . $insertQ . "\n"; 
 				return;
 			}
 

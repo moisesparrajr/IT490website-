@@ -5,37 +5,12 @@ use PhpAmqpLib\Connection\AMQPStreamConnection;
 use PhpAmqpLib\Message\AMQPMessage;
 use \Firebase\JWT\JWT;
 
-
-if($_POST["action"] == "authenticate")
+function send_query($query)
 {
-	$name = $_POST["user"];
-	$password = $_POST["password"];
-	
-	$dataToSend = $name . ' ' . $password;
-	
+	$dataToSend = $query;
 	$rpc_confirm = new RpcSend();
 	$response = $rpc_confirm->call($dataToSend);
-	echo $response;
-}
-
-if($_POST["action"] == "signup")
-{
-        $name = $_POST["user"];
-        $password = $_POST["password"];
-	$twitchID = $_POST["twitchID"];
-
-        $dataToSend = $name . ' ' . $password . ' ' . $twitchID;
-
-        $rpc_confirm = new RpcSend();
-        $response = $rpc_confirm->call($dataToSend);
-        echo $response;
-}
-
-function validJWT($token)
-{
-	$key = "secretKey";
-	$decoded = JWT::decode($token, $key);
-	return $decoded;
+	return $response;
 }
 
 class RpcSend {
@@ -45,10 +20,8 @@ class RpcSend {
 	private $response;
 	private $corr_id;
 	public function __construct() {
-		$ip_info = parse_ini_file("rpcIP.ini");
-		$ip_addr = $ip_info["rpc_ip"];
 		$this->connection = new AMQPStreamConnection(
-			$ip_addr, 5672, 'guest', 'guest');
+			'localhost', 5672, 'guest', 'guest');
 		$this->channel = $this->connection->channel();
 		list($this->callback_queue, ,) = $this->channel->queue_declare(
 			"", false, false, true, false);
@@ -69,7 +42,7 @@ class RpcSend {
 			array('correlation_id' => $this->corr_id,
 			      'reply_to' => $this->callback_queue)
 			);
-		$this->channel->basic_publish($msg, '', 'rpc_queue');
+		$this->channel->basic_publish($msg, '', 'db_queue');
 		while(!$this->response) {
 			$this->channel->wait();
 		}

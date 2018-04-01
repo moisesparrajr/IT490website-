@@ -25,10 +25,10 @@ function lookupStreamer()
 		url:'stream.php',
                 async: false,
                 data: {
-                'Streamer': params['streamer']
+                'streamer': params['streamer']
                 },	
 		success: function(data){
-                	console.log(data);
+			return data;
                 }
         });
 	

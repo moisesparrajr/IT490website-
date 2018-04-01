@@ -5,7 +5,7 @@ if($_POST)
 {
 	$link = connectDB();
 	
-	$userID = $_POST["Streamer];
+	$userID = $_POST["streamer"];
 	$sql = "SELECT * FROM Twitch_Data WHERE UserID=" . $userID . " FOR JSON AUTO;";
         $result = $link->query($sql);
 	
