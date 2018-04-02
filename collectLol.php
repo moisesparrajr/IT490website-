@@ -68,6 +68,7 @@ function updateLolData()
 
 function getSummonerByName($name)
 {
+	echo " Calling API summoner/v3/summoners/by-name \n";
 	//hit API start
 	$curl = curl_init();
 	$key_ini = parse_ini_file("apikey.ini");
@@ -83,7 +84,7 @@ function getSummonerByName($name)
         echo " status " . $status . "\n";
 	curl_close($curl);
 	$results = json_decode($result_string);
-	//var_dump($results);
+	var_dump($results);
 	//hit API stop
 	if(!property_exists($results, "accountId") && !property_exists($results, "id"))
 		echo " failure\n";
@@ -94,6 +95,7 @@ function getSummonerByName($name)
 
 function getSummonerData($id)
 {
+	echo " Calling API league/v3/positions/by-summoner \n";
 	echo " input id " . $id . "\n";
 	//hit API start
 	$curl = curl_init();
@@ -116,10 +118,40 @@ function getSummonerData($id)
 	}
 	curl_close($curl);
 	$results = json_decode($result_string);
-//	var_dump($results);
+	echo "anything\n";
+	var_dump($result_string);
+	var_dump($results);
 	return $results;
 }
 
-///lol/summoner/v3/summoner/{summonerAccount}
-///lol/match/v3/matchlists/by_account/{summonerID}
+function getQueueData()
+{
+	$id = 'RANKED_SOLO_5x5';
+        echo " Calling API league/v3/challengerleagues/by-queue \n";
+        //hit API start
+        $curl = curl_init();
+        $key_ini = parse_ini_file("apikey.ini");
+        $url = sprintf("https://na1.api.riotgames.com/lol/league/v3/positions/by-summoner/%s?api_key=%s", $id, $key_ini["key"]);
+        
+        //optional authentication:
+        //curl_setopt($curl, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
+        //curl_setopt($curl, CURL_USERAGENT);
+        curl_setopt($curl, CURLOPT_URL, $url);
+        curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
+	$result_string = curl_exec($curl);
+        $status = curl_getinfo($curl, CURLINFO_HTTP_CODE);
+        echo " status " . $status . "\n";
+        if(curl_error($curl))
+        {
+                echo " error " . curl_error($curl);
+                return null;
+        }
+        curl_close($curl);
+        $results = json_decode($result_string);
+        var_dump($results);
+        return $results;
+}
+
+// /lol/summoner/v3/summoner/{summonerAccount}
+// /lol/match/v3/matchlists/by_account/{summonerID}
 ?>
