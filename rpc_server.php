@@ -47,7 +47,8 @@ function validate($n)
 		$result = send_query($loginQ);
 		$resultObj = json_decode($result, true);
 		print_r($resultObj);
-
+		var_dump($result);
+		var_dump($resultObj);
 		if($resultObj > 0) 
 		{
 			if(password_verify($userData[1], $resultObj[0]["password"]))
@@ -59,12 +60,12 @@ function validate($n)
 					return $token;
 				}
 			}else{
-				echo "Login failed\n";
+				echo "Login failed1\n";
 			}
 		}
 		else
 		{
-			echo " Login failed\n";
+			echo " Login failed2\n";
 		}
 	}
 	if(count($userData) == 3)

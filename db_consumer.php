@@ -17,7 +17,7 @@ function processRequest($n)
 	//var_dump($sqlResult);
 	
 	$returnArray = array();
-	if(is_bool($sqlResult) === FALSE || is_bool($sqlResult) === TRUE)
+	if(is_bool($sqlResult) === TRUE)
 	{
 		$returnArray[] = (int)$sqlResult;
 	}
