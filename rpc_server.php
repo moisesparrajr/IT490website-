@@ -74,13 +74,13 @@ function validate($n)
                 //$resultUser = $link->query($signupQuser);
 		$resultUser = send_query($signupQuser);
                 $resultObjU = json_decode($resultUser, true);
-                print_r($resultObjU);
+                //print_r($resultObjU);
 
 		$signupQtwitch = "SELECT * FROM Users WHERE twitchID='$userData[2]'";
                 //$resultTwitch = $link->query($signupQtwitch);
 		$resultTwitch = send_query($signupQtwitch);
 		$resultObjT = json_decode($resultTwitch, true);
-		print_r($resultObjT);
+		//print_r($resultObjT);
 		
 		//if($resultUser->num_rows > 0 || $resultTwitch->num_rows > 0)
 		if(count($resultObjU) > 1 || count($resultObjT) > 1) 
@@ -95,9 +95,9 @@ function validate($n)
 			//if($link->query($insertQ) === TRUE)
 			$insertResult = send_query($insertQ);
 			$insertResultObj = json_decode($insertResult, true);
-			print_r($insertResultObj);
+			//print_r($insertResultObj);
 
-			if($insertResultObj === TRUE)
+			if($insertResultObj[0] == 1)
 			{
 				echo " Insert OK\n";
 			}

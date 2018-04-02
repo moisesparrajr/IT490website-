@@ -14,25 +14,24 @@ function processRequest($n)
 {
 	$link = connectDB();
 	$sqlResult = $link->query($n);
-	var_dump($sqlResult);
+	//var_dump($sqlResult);
 	
-	//echo $sqlResult;
 	$returnArray = array();
-	if(gettype($sqlResult) == "boolean")
+	if(is_bool($sqlResult) === FALSE || is_bool($sqlResult) === TRUE)
 	{
-		echo gettype($sqlResult);
 		$returnArray[] = (int)$sqlResult;
 	}
 	else
 	{
-	while($row = mysqli_fetch_assoc($sqlResult))
-	{
-		$returnArray[] = $row;
+		while($row = mysqli_fetch_assoc($sqlResult))
+		{
+			$returnArray[] = $row;
+		}
 	}
+
 	$resultJSON = json_encode($returnArray);
-	}
 	echo " Returning results\n ";
-	echo $resultJSON;
+	//echo $resultJSON;
 	return $resultJSON;
 }
 
