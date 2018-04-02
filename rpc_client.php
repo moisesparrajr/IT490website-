@@ -48,7 +48,7 @@ class RpcSend {
 		$ip_info = parse_ini_file("rpcIP.ini");
 		$ip_addr = $ip_info["rpc_ip"];
 		$this->connection = new AMQPStreamConnection(
-			$ip_addr, 5672, 'guest', 'guest');
+			$ip_addr, 5672, $ip_info["user"], $ip_info["password"]);
 		$this->channel = $this->connection->channel();
 		list($this->callback_queue, ,) = $this->channel->queue_declare(
 			"", false, false, true, false);

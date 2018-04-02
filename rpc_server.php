@@ -9,7 +9,7 @@ include 'db_producer.php';
 
 $ip_info = parse_ini_file("rpcIP.ini");
 $ip_addr = $ip_info["rpc_ip"];
-$connection = new AMQPStreamConnection($ip_addr, 5672, 'guest', 'guest');
+$connection = new AMQPStreamConnection($ip_addr, 5672, $ip_info["user"], $ip_info["password"]);
 $channel = $connection->channel();
 $channel->queue_declare('rpc_queue', false, false, false, false);
 
