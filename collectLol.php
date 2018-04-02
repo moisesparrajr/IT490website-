@@ -36,6 +36,7 @@ function updateLolData()
 				$data = getSummonerData($summonerData->{"id"});
 				$lolLink = connectDB();
 				
+				//Queries for rank(generic), summonerLvl, accountId
 				if(count($data) == 0) //if result is empty object
 				{
 					echo " No data, INSERT UPDATE rank, lvl, accountID\n";
@@ -57,6 +58,43 @@ function updateLolData()
 						trigger_error("Insert to LOL Error: " . $lolLink->error);
 					}
 				}
+
+				//Queries for ranks and tiers
+				$rank_solo = "Unranked";
+				$tier_solo = "Unranked";
+				$rank_flex_sr = "Unranked";
+				$tier_flex_sr = "Unranked";
+				$rank_flex_tt = "Unranked";
+				$tier_flex_tt = "Unranked";
+				//var_dump($data->context);
+				foreach($data as $queue)
+				{
+				if($queue->{"queueType"} == "RANKED_SOLO_5x5"){
+					$rank_solo = $queue->{"rank"};
+                                $tier_solo = $queue->{"tier"};
+}
+else
+				if($queue->{"queueType"} == "RANKED_FLEX_SR"){
+					$rank_flex_sr = $queue->{"rank"};
+                                $tier_flex_sr = $queue->{"tier"};
+}
+else
+				if($queue->{"queueType"} == "RANKED_FLEX_TT"){
+					$rank_flex_tt = $queue->{"rank"};
+                                $tier_flex_tt = $queue->{"tier"};
+}
+				$ranksQ = "UPDATE LoL_Data SET rank_solo = '".$rank_solo."', tier_solo = '".$tier_solo."', rank_flex_sr = '".$rank_flex_sr."', tier_flex_sr = '".$tier_flex_sr."', rank_flex_tt = '".$rank_flex_tt."', tier_flex_tt = '".$tier_flex_tt."' WHERE accountId = ".$summonerData->{"accountId"}.";";
+
+				}
+				echo $ranksQ;
+				$ranksResult = $lolLink->query($ranksQ);
+				echo $ranksResult;
+
+				echo " UPDATE ranks to LoL_Data\n";
+				if(!$ranksResult){
+                                                trigger_error("Insert to LOL Error: " . $lolLink->error);
+                                }
+
 			}
         	}
 	}
@@ -72,8 +110,9 @@ function getSummonerByName($name)
 	//hit API start
 	$curl = curl_init();
 	$key_ini = parse_ini_file("apikey.ini");
-	$url = sprintf("https://na1.api.riotgames.com/lol/summoner/v3/summoners/by-name/%s?api_key=%s", $name, $key_ini["key"]);
 	
+	$url = sprintf("https://na1.api.riotgames.com/lol/summoner/v3/summoners/by-name/%s?api_key=%s", rawurlencode($name), $key_ini["key"]);
+
 	//optional authentication:
 	//curl_setopt($curl, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
 	//curl_setopt($curl, CURL_USERAGENT);
@@ -118,9 +157,9 @@ function getSummonerData($id)
 	}
 	curl_close($curl);
 	$results = json_decode($result_string);
-	echo "anything\n";
-	var_dump($result_string);
-	var_dump($results);
+
+	//var_dump($result_string);
+	//var_dump($results);
 	return $results;
 }
 
