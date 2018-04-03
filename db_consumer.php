@@ -6,9 +6,16 @@ use PhpAmqpLib\Message\AMQPMessage;
 use \Firebase\JWT\JWT;
 include 'connect.php';
 
-$connection = new AMQPStreamConnection('localhost', 5672, 'guest', 'guest');
+$ip_info = parse_ini_file("rpcIP.ini");
+
+$connection = new AMQPStreamConnection($ip_info["rpc_ip"], 5672, $ip_info["user"], $ip_info["password"]);
 $channel = $connection->channel();
 $channel->queue_declare('db_queue', false, false, false, false);
+
+function getFromIni()
+{
+	
+}
 
 function processRequest($n)
 {
