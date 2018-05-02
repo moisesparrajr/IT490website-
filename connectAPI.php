@@ -1,6 +1,10 @@
 
 <?php
 
+<<<<<<< HEAD
+=======
+//returns connection to p_LeagueDB
+>>>>>>> bf5d35123f7b946dbe61ff7c23b8b7e7d0115513
 function connectDB()
 {
         echo " Attempting connection to Users\n";
@@ -23,6 +27,10 @@ function connectDB()
         }
 }
 
+<<<<<<< HEAD
+=======
+//returns connection to LoL_Data
+>>>>>>> bf5d35123f7b946dbe61ff7c23b8b7e7d0115513
 function connectLol()
 {
         echo " Attempting connection to LolDB\n";

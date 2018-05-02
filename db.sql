@@ -73,7 +73,11 @@ CREATE TABLE `LoL_Data` (
 
 LOCK TABLES `LoL_Data` WRITE;
 /*!40000 ALTER TABLE `LoL_Data` DISABLE KEYS */;
+<<<<<<< HEAD
 INSERT INTO `LoL_Data` VALUES ('test',5,5,1,1,'test','test',5,5,5,5),('myrank',20,1,0,0,'myteamName','myteamID',2000,3,1519512965,6),('bronze',32,7,0,0,'team noobs','team noobs id',3000,8,1519514527,7);
+=======
+INSERT INTO `LoL_Data` VALUES ('test',5,5,1,1,'test','test',5,5,5,5),('myrank',20,1,0,0,'myteamName','myteamID',2000,3,1519512965,6),('bronze',32,7,0,0,'team noobs','team noobs id',3000,8,1519514527,7),('0',NULL,NULL,NULL,NULL,NULL,NULL,NULL,80,NULL,49504659);
+>>>>>>> bf5d35123f7b946dbe61ff7c23b8b7e7d0115513
 /*!40000 ALTER TABLE `LoL_Data` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -282,18 +286,31 @@ CREATE TABLE `Users` (
   `isActive` tinyint(1) NOT NULL DEFAULT '0',
   `lastActivity` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `twitchID` varchar(255) DEFAULT NULL,
+<<<<<<< HEAD
   `summonerID` int(11) DEFAULT NULL,
+=======
+  `accountID` int(11) DEFAULT NULL,
+>>>>>>> bf5d35123f7b946dbe61ff7c23b8b7e7d0115513
   `ratingCount` int(11) DEFAULT '0',
   `averageRating` float DEFAULT '0',
   `streamerSchedule` varchar(2048) DEFAULT NULL,
   `lastNotified` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `isStreaming` tinyint(1) DEFAULT '0',
+<<<<<<< HEAD
   PRIMARY KEY (`personalID`),
   UNIQUE KEY `twitchID` (`twitchID`),
   UNIQUE KEY `summonerID` (`summonerID`),
   CONSTRAINT `Users_ibfk_1` FOREIGN KEY (`twitchID`) REFERENCES `Twitch_Data` (`userID`),
   CONSTRAINT `Users_ibfk_2` FOREIGN KEY (`summonerID`) REFERENCES `LoL_Data` (`accountID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+=======
+  `summonerName` varchar(50) DEFAULT NULL,
+  `summonerID` int(11) DEFAULT NULL,
+  PRIMARY KEY (`personalID`),
+  UNIQUE KEY `twitchID` (`twitchID`),
+  UNIQUE KEY `summonerID` (`accountID`)
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
+>>>>>>> bf5d35123f7b946dbe61ff7c23b8b7e7d0115513
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -302,7 +319,11 @@ CREATE TABLE `Users` (
 
 LOCK TABLES `Users` WRITE;
 /*!40000 ALTER TABLE `Users` DISABLE KEYS */;
+<<<<<<< HEAD
 INSERT INTO `Users` VALUES (1,'dummy@data.com','securepassword','dummytoken',0,'2018-03-04 01:08:57','dummytwitch',5,0,0,NULL,'2018-03-04 01:08:57',0),(2,'secret@agent.com','topsecretpasswd','secretToken',0,'2018-03-04 01:08:57','secretTwitchID',6,0,0,NULL,'2018-03-04 01:08:57',0),(3,'test@test.com','testpasswd','testtoken',0,'2018-03-04 01:08:57','testtwitch',7,0,0,NULL,'2018-03-04 01:08:57',0),(4,'not@twitch.com','pass','token',0,'2018-03-04 01:08:57',NULL,NULL,0,0,'I stream on mondays from 8-11am because I hate myself.','2018-03-04 01:08:57',0);
+=======
+INSERT INTO `Users` VALUES (1,'dummy@data.com','securepassword','dummytoken',0,'2018-03-08 23:52:40','dummytwitch',NULL,0,0,NULL,'2018-03-04 01:08:57',0,NULL,NULL),(2,'secret@agent.com','topsecretpasswd','secretToken',0,'2018-03-08 23:52:40','secretTwitchID',NULL,0,0,NULL,'2018-03-04 01:08:57',0,NULL,NULL),(3,'test@test.com','testpasswd','testtoken',0,'2018-03-08 23:52:40','testtwitch',NULL,0,0,NULL,'2018-03-04 01:08:57',0,NULL,NULL),(4,'not@twitch.com','pass','token',0,'2018-03-04 01:08:57',NULL,NULL,0,0,'I stream on mondays from 8-11am because I hate myself.','2018-03-04 01:08:57',0,NULL,NULL),(5,'test','test',NULL,0,'2018-03-09 20:27:57',NULL,49504659,0,0,NULL,'2018-03-08 22:08:39',0,'Joybane',34970976),(6,'Dyrus','Dyrus',NULL,0,'2018-03-09 20:27:58',NULL,32766,0,0,NULL,'2018-03-09 06:38:12',0,'Dyrus',5908),(7,'user','pass',NULL,0,'2018-03-10 15:27:35','dontcare',NULL,0,0,NULL,'2018-03-10 15:27:35',0,NULL,NULL),(8,'Testing1','$2y$10$aL0CHQh/ta3oBhUdPliCNu2ZVQVGvFdySJXQgYv6Ncuth0ZtmS4M2',NULL,0,'2018-03-29 19:46:24','DrDisRespectLive',NULL,0,0,NULL,'2018-03-29 19:46:24',0,NULL,NULL);
+>>>>>>> bf5d35123f7b946dbe61ff7c23b8b7e7d0115513
 /*!40000 ALTER TABLE `Users` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -344,4 +365,8 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
+<<<<<<< HEAD
 -- Dump completed on 2018-03-03 20:18:02
+=======
+-- Dump completed on 2018-03-31 15:47:09
+>>>>>>> bf5d35123f7b946dbe61ff7c23b8b7e7d0115513

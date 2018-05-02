@@ -1,202 +1,192 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Thumbnails</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+  <script src="login.js"></script>
+  <script src="kick.js"></script>
+  <script src="populate.js"></script>
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-  <!--
-    Modified from the Debian original for Ubuntu
-    Last updated: 2014-03-19
-    See: https://launchpad.net/bugs/1288690
-  -->
-  <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <title>Apache2 Ubuntu Default Page: It works</title>
-    <style type="text/css" media="screen">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-  * {
-    margin: 0px 0px 0px 0px;
-    padding: 0px 0px 0px 0px;
+</head>
+<style>
+  body{
+    background-color: black;
+  }
+  h2{
+    color: white;
+  }
+  .btn{
+    background-color: green;
+  }
+  .footer{
+    position: fixed;
+    left:0;
+    bottom: 0;
+    right:0;
+    width:100%;
+    text-align:right;
+  }
+   .header{
+    position: header;
+    left:0;
+    bottom: 0;
+    right:0;
+    width:100%;
+    text-align:right;
+  }
+  .btn1{
+    float:left;
   }
 
-  body, html {
-    padding: 3px 3px 3px 3px;
-
-    background-color: #D8DBE2;
-
-    font-family: Verdana, sans-serif;
-    font-size: 11pt;
-    text-align: center;
-  }
-
-  div.main_page {
-    position: relative;
-    display: table;
-
-    width: 800px;
-
-    margin-bottom: 3px;
-    margin-left: auto;
-    margin-right: auto;
-    padding: 0px 0px 0px 0px;
-
-    border-width: 2px;
-    border-color: #212738;
-    border-style: solid;
-
-    background-color: #FFFFFF;
-
-    text-align: center;
-  }
-
-  div.page_header {
-    height: 99px;
-    width: 100%;
-
-    background-color: #F5F6F7;
-  }
-
-  div.page_header span {
-    margin: 15px 0px 0px 50px;
-
-    font-size: 180%;
-    font-weight: bold;
-  }
-
-  div.page_header img {
-    margin: 3px 0px 0px 40px;
-
-    border: 0px 0px 0px;
-  }
-
-  div.table_of_contents {
-    clear: left;
-
-    min-width: 200px;
-
-    margin: 3px 3px 3px 3px;
-
-    background-color: #FFFFFF;
-
-    text-align: left;
-  }
-
-  div.table_of_contents_item {
-    clear: left;
-
-    width: 100%;
-
-    margin: 4px 0px 0px 0px;
-
-    background-color: #FFFFFF;
-
-    color: #000000;
-    text-align: left;
-  }
-
-  div.table_of_contents_item a {
-    margin: 6px 0px 0px 6px;
-  }
-
-  div.content_section {
-    margin: 3px 3px 3px 3px;
-
-    background-color: #FFFFFF;
-
-    text-align: left;
-  }
-
-  div.content_section_text {
-    padding: 4px 8px 4px 8px;
-
-    color: #000000;
-    font-size: 100%;
-  }
-
-  div.content_section_text pre {
-    margin: 8px 0px 8px 0px;
-    padding: 8px 8px 8px 8px;
-
-    border-width: 1px;
-    border-style: dotted;
-    border-color: #000000;
-
-    background-color: #F5F6F7;
-
-    font-style: italic;
-  }
-
-  div.content_section_text p {
-    margin-bottom: 6px;
-  }
-
-  div.content_section_text ul, div.content_section_text li {
-    padding: 4px 8px 4px 16px;
-  }
-
-  div.section_header {
-    padding: 3px 6px 3px 6px;
-
-    background-color: #8E9CB2;
-
-    color: #FFFFFF;
-    font-weight: bold;
-    font-size: 112%;
-    text-align: center;
-  }
-
-  div.section_header_red {
-    background-color: #CD214F;
-  }
-
-  div.section_header_grey {
-    background-color: #9F9386;
-  }
-
-  .floating_element {
-    position: relative;
+.tablink {
+    background-color: #555;
+    color: white;
     float: left;
-  }
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 14px 24px;
+    font-size: 17px;
+    width: 33%;
+}
+.tabcontent {
+    color: white;
+    display: none;
+    text-align: center;
+}
+.tablink:hover {
+    background-color: #777;
+}
 
-  div.table_of_contents_item a,
-  div.content_section_text a {
-    text-decoration: none;
-    font-weight: bold;
-  }
+</style>
+<center>
+<div id="Oslo" class="tabcontent">
+</div>
 
-  div.table_of_contents_item a:link,
-  div.table_of_contents_item a:visited,
-  div.table_of_contents_item a:active {
-    color: #000000;
-  }
+<button class="tablink" onclick="location.href='thumbnails.html'" id="defaultOpen">Thumbnails</button>
+<button class="tablink" onclick="location.href='stream.html'">Streamer</button>
+<button class="tablink" onclick="logoutClick()">Logout</button>
+</center>
+<body>
+  
+<div class="header">
+ <span class="btn1"><button onclick="location.href='home.html'"class ="btn">home</button></span> <button onclick="location.href='stats.html'"class ="btn">stats</button>
+</div>
 
-  div.table_of_contents_item a:hover {
-    background-color: #000000;
+<div class="header2">
+  
+</div>
+  <center>
+  <h2>Streams</h2>  
+  <br>
+  <br>
+  <br>
+  <br>
 
-    color: #FFFFFF;
-  }
+<div class="slideshow-container">  
+  <div id="myCarousel" class="carousel slide" data-ride="carousel">
+    <div class="carousel-inner">
 
-  div.content_section_text a:link,
-  div.content_section_text a:visited,
-   div.content_section_text a:active {
-    background-color: #DCDFE6;
+      <div class="item active">
+       <div class = "row">   
+<<<<<<< HEAD
+        <img id="t_0" src="la.jpg" alt="test1" style="width:20%;">
+        <img id="t_1" src="la.jpg" alt="test2" style="width:20%;">
+        <img id="t_2" src="la.jpg" alt="test3" style="width:20%;">
+=======
+    <a href="http://www.njit.edu" id="link_0"><img id="t_0" src="la.jpg" alt="test1" style="width:20%;"></a>
+        <a href="http://www.njit.edu" id="link_1"><img id="t_1" src="la.jpg" alt="test2" style="width:20%;"></a>
+    <a href="http://www.njit.edu" id="link_2"><img id="t_2" src="la.jpg" alt="test3" style="width:20%;"></a>
+>>>>>>> bf5d35123f7b946dbe61ff7c23b8b7e7d0115513
+       </div>
+      </div>
 
-    color: #000000;
-  }
+      <div class="item">
+        <div class = "row ">
+<<<<<<< HEAD
+        <img id="t_3" src="la.jpg" alt="test1" style="width:20%;">
+        <img id="t_4" src="la.jpg" alt="test2" style="width:20%;">
+        <img id="t_5" src="la.jpg" alt="test3" style="width:20%;">
+=======
+        <a href="http://www.njit.edu" id="link_3"><img id="t_3" src="la.jpg" alt="test1" style="width:20%;"></a>
+        <a href="http://www.njit.edu" id="link_4"><img id="t_4" src="la.jpg" alt="test2" style="width:20%;"></a>
+        <a href="http://www/njit.edu" id="link_5"><img id="t_5" src="la.jpg" alt="test3" style="width:20%;"></a>
+>>>>>>> bf5d35123f7b946dbe61ff7c23b8b7e7d0115513
+        </div>
 
-  div.content_section_text a:hover {
-    background-color: #000000;
+      </div>
+    
+      <div class="item">
+        <div class = "row">
+<<<<<<< HEAD
+        <img id="t_6" src="la.jpg" alt="test1" style="width:20%;">
+        <img id="t_7" src="la.jpg" alt="test2" style="width:20%;">
+        <img id="t_8" src="la.jpg" alt="test3" style="width:20%;">
+=======
+        <a href="http://www.njit.edu" id="link_6"><img id="t_6" src="la.jpg" alt="test1" style="width:20%;"></a>
+        <a href="http://www.njit.edu" id="link_7"><img id="t_7" src="la.jpg" alt="test2" style="width:20%;"></a>
+        <a href="http://www.njit.edu" id="link_8"><img id="t_8" src="la.jpg" alt="test3" style="width:20%;"></a>
+>>>>>>> bf5d35123f7b946dbe61ff7c23b8b7e7d0115513
+      </div>
+      </div>
+    </div>
 
-    color: #DCDFE6;
-  }
+    <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+      <span class="glyphicon glyphicon-chevron-left"></span>
+      <span class="sr-only">Previous</span>
+    </a>
+    <a class="right carousel-control" href="#myCarousel" data-slide="next">
+      <span class="glyphicon glyphicon-chevron-right"></span>
+      <span class="sr-only">Next</span>
+    </a>
+  </div>
+</div>
+</center>
 
-  div.validator {
-  }
-    </style>
-  </head>
-  <body>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-	<script src="login.js"></script>
-	<input type="button" onclick="deleteAllCookies();"/>
-	<script src="kick.js"></script>
-			
-  </body>
+<script>
+<<<<<<< HEAD
+        var response = callTwitch();
+    var response2 = dbTwitch();
+
+        console.log(response2);
+        for(i = 0; i < 9; i++)
+        {
+                var obj = response.streams[i].preview.medium;
+                document.getElementById("t_" + i).src = obj;
+=======
+    var response = callTwitch();
+
+        console.log(response);
+        for(i = 0; i < 9; i++)
+        {   
+        var obj = response.streams[i].preview.medium;
+        var link = "stream.html?streamer=" + response.streams[i].channel.name + "&url=" + response.streams[i].channel.url;
+                document.getElementById("t_" + i).src = obj;
+        document.getElementById("link_" + i).href = link;
+>>>>>>> bf5d35123f7b946dbe61ff7c23b8b7e7d0115513
+        }
+
+</script>
+
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<div class ="footer"><button onclick="location.href='contact.html'"class ="btn">contact us</button></div></div>
+</body>
 </html>
-

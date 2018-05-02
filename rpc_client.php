@@ -5,6 +5,10 @@ use PhpAmqpLib\Connection\AMQPStreamConnection;
 use PhpAmqpLib\Message\AMQPMessage;
 use \Firebase\JWT\JWT;
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> bf5d35123f7b946dbe61ff7c23b8b7e7d0115513
 if($_POST["action"] == "authenticate")
 {
 	$name = $_POST["user"];
@@ -44,8 +48,15 @@ class RpcSend {
 	private $response;
 	private $corr_id;
 	public function __construct() {
+<<<<<<< HEAD
 		$this->connection = new AMQPStreamConnection(
 			'localhost', 5672, 'guest', 'guest');
+=======
+		$ip_info = parse_ini_file("rpcIP.ini");
+		$ip_addr = $ip_info["rpc_ip"];
+		$this->connection = new AMQPStreamConnection(
+			$ip_addr, 5672, $ip_info["user"], $ip_info["password"]);
+>>>>>>> bf5d35123f7b946dbe61ff7c23b8b7e7d0115513
 		$this->channel = $this->connection->channel();
 		list($this->callback_queue, ,) = $this->channel->queue_declare(
 			"", false, false, true, false);

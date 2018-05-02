@@ -1,25 +1,63 @@
 <!DOCTYPE html>
 <html>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <head>
 	<title>Home</title>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 </head>
 <style>
 body{
 	background-color:#FF3300;
 	color: black;
 }
+.tablink {
+    background-color: #555;
+    color: white;
+    position: header;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 14px 24px;
+    font-size: 17px;
+    width: 33%;
+}
+.tabcontent {
+    color: white;
+    display: none;
+    text-align: center;
+}
+.tablink:hover {
+    background-color: #777;
+}
 </style>
+<div id="Oslo" class="tabcontent">
+</div>
+
+<button class="tablink" onclick="location.href='thumbnails.html'" id="defaultOpen">Thumbnails</button>
+<button class="tablink" onclick="location.href='stream.html'">Streamer</button>
+<button class="tablink" onclick="logoutClick()">Logout</button>
+
+<center>
 <body>
 <script src="login.js"></script>
 <script src="kick.js"></script>
 <script src="logout.js"></script>
-
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <h3> This proves a deliverable: User Authentication</h3>
-<button onclick="location.href='thumbnails.html'">Thumbnails</button>
-<button onclick="location.href='stream.html'"">Streamer</button></br>
-<button onclick="logoutClick()">Logout</button>
+<!--<button onclick="location.href='stream.html'"">Streamer</button>
+<button onclick="logoutClick()">Logout</button>!-->
 
 
 </body>
+</center>
 </html>

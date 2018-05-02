@@ -16,10 +16,17 @@ function dbTwitch()
 {
 	var ids = $.ajax({
 		url: 'populate.php',
+<<<<<<< HEAD
 		type: 'POST',
 		dataType: 'text',
 		data: {'action':'twitch'},
 		success: 
+=======
+		async: false,
+		type: 'POST',
+		dataType: 'JSON',
+		data: {'action':'twitch'},
+>>>>>>> bf5d35123f7b946dbe61ff7c23b8b7e7d0115513
 	});
 
 	return ids;
