@@ -33,7 +33,7 @@ input[type=email ], select {
     border-radius: 4px;
     box-sizing: border-box;
 }
-m.message {
+.message {
 	width: 100%;
     padding: 0px 0px;
     display: inline-block;
@@ -66,13 +66,39 @@ textarea{
     cursor: pointer;
 }
 
+.tablink {
+    background-color: #555;
+    color: white;
+    position: header;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 14px 24px;
+    font-size: 17px;
+    width: 33%;
+    background-color: #6E7783
 }
-
+.tabcontent {
+    color: white;
+    display: none;
+    text-align: center;
+}
+.tablink:hover {
+    background-color: #777;
 }
 
 </style>
 </head>
+<div id="Oslo" class="tabcontent">
+</div>
+
+<button class="tablink" onclick="location.href='thumbnails.html'" id="defaultOpen">Home</button>
+<button class="tablink" onclick="location.href='stream.html'">Thumbnails</button>
+<button class="tablink" onclick="location.href='account.html'">Account</button>
+<div class="header">
+
 <body>
+    
 <center>
 <h1> CONTACT US</h1>
 <input type="email" placeholder="Email" name="Email" required><br>

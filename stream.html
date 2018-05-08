@@ -6,11 +6,11 @@
 <script src="streamFunc.js"></script>
 </head>
 <style>
-@import url(//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css);
+/*@import url(//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css);*/
 
-fieldset, label { margin: 0; padding: 0; }
-body{ margin: 20px; }
-h1 { font-size: 1.5em; margin: 10px; color: white;}
+
+/*body{ margin: 20px; }*/
+/*h1 { font-size: 1.5em; margin: 10px; color: white;}*/
 
 body{
 background: url(https://de1p035kd0jc1.cloudfront.net/pb/media/2015/09/Ziggs_MadScientistSkin.jpg) 
@@ -97,6 +97,28 @@ div .rating {
       display: block;
   }
 }
+.tablink {
+    background-color: #555;
+    color: white;
+    position: header;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 14px 24px;
+    font-size: 17px;
+    width: 33%;
+    background-color: #6E7783
+}
+.tabcontent {
+    color: white;
+    display: none;
+    text-align: center;
+}
+.tablink:hover {
+    background-color: #777;
+}
+
+
 .rating > input:checked ~ label, /* show gold star when clicked */
 .rating:not(:checked) > label:hover, /* hover current star */
 .rating:not(:checked) > label:hover ~ label { color: #FFD700;  } /* hover previous stars in list */
@@ -148,6 +170,13 @@ th{
 </style>
 
 <body>
+<div id="Oslo" class="tabcontent">
+</div>
+
+<button class="tablink" onclick="location.href='thumbnails.html'" id="defaultOpen">Home</button>
+<button class="tablink" onclick="location.href='stream.html'">Thumbnails</button>
+<button class="tablink" onclick="location.href='account.html'">Account</button>
+<div class="header">
 <br>
 <br>
 <br>
