@@ -1,3 +1,4 @@
+<!---delete !-->
 <!DOCTYPE html>
 <html>
 <title>Viewer</title>
@@ -7,8 +8,6 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="login.js"></script>
 <script src="kick.js"></script>
-<script type="search.js"></script>
-
 <style>
 * {box-sizing: border-box;}
 
@@ -96,14 +95,10 @@ font-size: 17px;
   <Button onclick="location.href='home.html'">Home</Button>
   <Button onclick="location.href='stats.html'">Stats</Button>
   <div class="search-container">
-      <!---<input type="text" id="myInput" placeholder="Search.." name="search">!-->
-
-      <!---<button onclick="search(user.value)" type="button"><i class="fa fa-search"></i></button>!-->
-      <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for names..">
-
+      <input type="text" placeholder="Search.." name="search">
+      <button type="submit"><i class="fa fa-search"></i></button>
   </div>
 </div>
-
 <center>
   <div class="video">
     <br>
@@ -112,14 +107,6 @@ font-size: 17px;
     <div id="twitch-embed">
     <script src="https://embed.twitch.tv/embed/v1.js"></script></div>
     <script type="text/javascript">
-<<<<<<< HEAD
-      new Twitch.Embed("twitch-embed", {
-        width: 854,
-        height: 480,
-        channel: "monstercat"
-      });
-
-=======
 console.log("Testing!!!!");
 function parseURLParams(url) {
    var queryStart = url.indexOf("?") + 1,
@@ -149,7 +136,6 @@ if(params.hasOwnProperty('streamer'))
         channel: params['streamer']
       });
 }
->>>>>>> bf5d35123f7b946dbe61ff7c23b8b7e7d0115513
     </script>
   </div>
 

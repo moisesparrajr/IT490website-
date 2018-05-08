@@ -4,7 +4,7 @@
 <head>
 <style>
 body{
-	background: url(http://dnd.wizards.com/sites/default/files/media/Wallpaper3_TH.jpg) no-repeat center center fixed; 
+	background: url(http://hasagi.gg/wp-content/uploads/2017/10/pUk1gAa.jpg) no-repeat center center fixed; 
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -79,7 +79,13 @@ textarea{
 <br><input type="text" placeholder="Topic" name="Topic" required><br>
 <p><font size ="3"></font></p>
 <br><textarea rows="20" cols="57" placeholder="Message" form="usrform" required></textarea><br>
-<br><button class="button"> Send </button>
+<br><button class="button" onclick="myalert()"> Send </button>
 </center>
+<script>
+    function myalert(){
+        alert("your message was sent we will get back to you shortly");
+        location.href = "http://web.njit.edu/~mp473/test/thankyou.html";
+    }
+</script>
 </body>
 </html>

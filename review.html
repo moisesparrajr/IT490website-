@@ -1,8 +1,9 @@
+<!---delete !-->
 <!DOCTYPE html>
 <html>
 <head>
   <title>Review Page</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
 </head>
@@ -15,8 +16,16 @@
 
 fieldset, label { margin: 0; padding: 0; }
 body{ margin: 20px; }
-h1 { font-size: 1.5em; margin: 10px; }
+h1 { font-size: 1.5em; margin: 10px; color: white;}
 
+body{
+background: url(https://de1p035kd0jc1.cloudfront.net/pb/media/2015/09/Ziggs_MadScientistSkin.jpg) 
+    no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
 textarea{
     resize: none;
     font-family: Helvetica;
@@ -45,6 +54,7 @@ div .rating {
   font-family: FontAwesome;
   display: inline-block;
   content: "\f005";
+  text-align: center;
 }
 
 .rating > .half:before { 
@@ -57,7 +67,7 @@ div .rating {
  float: right; 
 }
 
-container {
+.container {
   border: 2px solid #ccc;
   background-color: #eee;
   border-radius: 5px;
@@ -80,6 +90,7 @@ container {
 .container span {
   font-size: 20px;
   margin-right: 15px;
+  text-align:center;
 }
 
 @media (max-width: 500px) {
@@ -118,16 +129,20 @@ container {
     <input type="radio" id="star1" name="rating" value="1" /><label class = "full" for="star1" title="Sucks big time - 1 star"></label>
     <input type="radio" id="starhalf" name="rating" value="half" /><label class="half" for="starhalf" title="Sucks big time - 0.5 stars"></label>
 </fieldset><br><br>
-<textarea rows="10" cols="57" placeholder="Review"></textarea><br>
+
+<textarea rows="10" placeholder="Review"></textarea><br>
+<br>
 <input type="button" onclick="save()" value="submit"> 
 
 <script>
+  function save()
   
 $('.add-remove').slick({
   slidesToShow: 3,
   slidesToScroll: 10
 });
 $('.js-add-slide').on('click', function() {
+  console.log("here here");
   slideIndex++;
   $('.add-remove').slick('slickAdd','<div><h3>' + slideIndex + '</h3></div>');
 });
@@ -137,6 +152,7 @@ $('.js-remove-slide').on('click', function() {
   if (slideIndex !== 0){
     slideIndex--;
   }
+  location.href = "http://web.njit.edu/~mp473/test/thankyou.html";
 });
 </script>
 

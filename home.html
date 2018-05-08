@@ -6,8 +6,11 @@
 </head>
 <style>
 body{
-	background-color:#FF3300;
-	color: black;
+background: url(https://static.lolwallpapers.net/2015/01/shadow_isles.jpg) 
+    no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
 }
 .tablink {
     background-color: #555;
@@ -19,22 +22,32 @@ body{
     padding: 14px 24px;
     font-size: 17px;
     width: 33%;
+    background-color: #6E7783
 }
 .tabcontent {
     color: white;
     display: none;
     text-align: center;
+    height: 50;
 }
 .tablink:hover {
     background-color: #777;
 }
+h3{
+  color:white;
+}
+.search-container{
+
+}
 </style>
+<!-- the start the the top tab!-->
 <div id="Oslo" class="tabcontent">
 </div>
 
-<button class="tablink" onclick="location.href='thumbnails.html'" id="defaultOpen">Thumbnails</button>
-<button class="tablink" onclick="location.href='stream.html'">Streamer</button>
-<button class="tablink" onclick="logoutClick()">Logout</button>
+<button class="tablink" onclick="location.href='home.html'" id="defaultOpen">Home</button>
+<button class="tablink" onclick="location.href='thumbnails.html'">thumbnails</button>
+<button class="tablink" onclick="loca">Contact Us</button>
+<!--the end the the top tab!-->
 
 <center>
 <body>
@@ -54,8 +67,8 @@ body{
 <br>
 <br>
 <h3> This proves a deliverable: User Authentication</h3>
-<!--<button onclick="location.href='stream.html'"">Streamer</button>
-<button onclick="logoutClick()">Logout</button>!-->
+<div class="search-container">
+      <input type="text" placeholder="Search.." name="search" size="70"> <button onclick="location.href='stream.html'"">Search</button>
 
 
 </body>

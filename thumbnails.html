@@ -10,17 +10,16 @@
   <script src="login.js"></script>
   <script src="kick.js"></script>
   <script src="populate.js"></script>
-  
 
 </head>
 <style>
-  body{
-   background: url(https://www.nustm.org/wp-content/uploads/2017/06/background-image-html.jpg) no-repeat center center fixed; 
+body{
+background: url(https://eune.leagueoflegends.com/sites/default/files/styles/scale_xlarge/public/upload/copy_of_redirectimage.jpg?itok=EuLpAJcm) 
+    no-repeat center center fixed; 
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
-  background-size: cover;
-  }
+}
   h2{
     color: white;
   }
@@ -42,20 +41,22 @@
     right:0;
     width:100%;
     text-align:right;
+    
   }
   .btn1{
     float:left;
   }
-
-.tablink {
+  .tablink {
     background-color: #555;
     color: white;
+    position: header;
     border: none;
     outline: none;
     cursor: pointer;
     padding: 14px 24px;
     font-size: 17px;
     width: 33%;
+    background-color: #6E7783
 }
 .tabcontent {
     color: white;
@@ -66,21 +67,24 @@
     background-color: #777;
 }
 </style>
-<center>
+<body>
+
 <div id="Oslo" class="tabcontent">
 </div>
 
 <button class="tablink" onclick="location.href='home.html'" id="defaultOpen">Home</button>
 <button class="tablink" onclick="location.href='stats.html'">Stats</button>
-<button class="tablink" onclick="location.href='contact.html'">   contact Us </button>
-</center>
-<body>
-  
+<button class="tablink" onclick="location.href='contact.html'">Contact Us</button>
 
+<div class="header">
+</div>
 <div class="header2">
   
 </div>
   <center>
+  <br>
+  <br>
+  <br>
   <h2>Streams</h2>  
   <br>
   <br>
@@ -93,44 +97,26 @@
 
       <div class="item active">
        <div class = "row">   
-<<<<<<< HEAD
-        <img id="t_0" src="la.jpg" alt="test1" style="width:20%;">
-        <img id="t_1" src="la.jpg" alt="test2" style="width:20%;">
-        <img id="t_2" src="la.jpg" alt="test3" style="width:20%;">
-=======
-    <a href="http://www.njit.edu" id="link_0"><img id="t_0" src="la.jpg" alt="test1" style="width:20%;"></a>
+  <a href="http://www.njit.edu" id="link_0"><img id="t_0" src="la.jpg" alt="test1" style="width:20%;"></a>
         <a href="http://www.njit.edu" id="link_1"><img id="t_1" src="la.jpg" alt="test2" style="width:20%;"></a>
-    <a href="http://www.njit.edu" id="link_2"><img id="t_2" src="la.jpg" alt="test3" style="width:20%;"></a>
->>>>>>> bf5d35123f7b946dbe61ff7c23b8b7e7d0115513
+  <a href="http://www.njit.edu" id="link_2"><img id="t_2" src="la.jpg" alt="test3" style="width:20%;"></a>
        </div>
       </div>
 
       <div class="item">
         <div class = "row ">
-<<<<<<< HEAD
-        <img id="t_3" src="la.jpg" alt="test1" style="width:20%;">
-        <img id="t_4" src="la.jpg" alt="test2" style="width:20%;">
-        <img id="t_5" src="la.jpg" alt="test3" style="width:20%;">
-=======
         <a href="http://www.njit.edu" id="link_3"><img id="t_3" src="la.jpg" alt="test1" style="width:20%;"></a>
         <a href="http://www.njit.edu" id="link_4"><img id="t_4" src="la.jpg" alt="test2" style="width:20%;"></a>
         <a href="http://www/njit.edu" id="link_5"><img id="t_5" src="la.jpg" alt="test3" style="width:20%;"></a>
->>>>>>> bf5d35123f7b946dbe61ff7c23b8b7e7d0115513
         </div>
 
       </div>
     
       <div class="item">
         <div class = "row">
-<<<<<<< HEAD
-        <img id="t_6" src="la.jpg" alt="test1" style="width:20%;">
-        <img id="t_7" src="la.jpg" alt="test2" style="width:20%;">
-        <img id="t_8" src="la.jpg" alt="test3" style="width:20%;">
-=======
         <a href="http://www.njit.edu" id="link_6"><img id="t_6" src="la.jpg" alt="test1" style="width:20%;"></a>
         <a href="http://www.njit.edu" id="link_7"><img id="t_7" src="la.jpg" alt="test2" style="width:20%;"></a>
         <a href="http://www.njit.edu" id="link_8"><img id="t_8" src="la.jpg" alt="test3" style="width:20%;"></a>
->>>>>>> bf5d35123f7b946dbe61ff7c23b8b7e7d0115513
       </div>
       </div>
     </div>
@@ -148,26 +134,15 @@
 </center>
 
 <script>
-<<<<<<< HEAD
-        var response = callTwitch();
-    var response2 = dbTwitch();
-
-        console.log(response2);
-        for(i = 0; i < 9; i++)
-        {
-                var obj = response.streams[i].preview.medium;
-                document.getElementById("t_" + i).src = obj;
-=======
-    var response = callTwitch();
+  var response = callTwitch();
 
         console.log(response);
         for(i = 0; i < 9; i++)
-        {   
-        var obj = response.streams[i].preview.medium;
-        var link = "stream.html?streamer=" + response.streams[i].channel.name + "&url=" + response.streams[i].channel.url;
+        { 
+    var obj = response.streams[i].preview.medium;
+    var link = "stream.html?streamer=" + response.streams[i].channel.name + "&url=" + response.streams[i].channel.url;
                 document.getElementById("t_" + i).src = obj;
-        document.getElementById("link_" + i).href = link;
->>>>>>> bf5d35123f7b946dbe61ff7c23b8b7e7d0115513
+    document.getElementById("link_" + i).href = link;
         }
 
 </script>
@@ -186,6 +161,6 @@
 <br>
 <br>
 <br>
-<div class ="footer"><button onclick="location.href='contact.html'"class ="btn">contact us</button></div></div>
+
 </body>
 </html>
