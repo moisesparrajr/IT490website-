@@ -3,10 +3,11 @@
 <head>
 <title>Streamers</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
 <script src="streamFunc.js"></script>
 </head>
 <style>
-/*@import url(//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css);*/
+@import url(//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css);
 
 
 /*body{ margin: 20px; }*/
@@ -127,6 +128,7 @@ div .rating {
 .rating > input:checked ~ label:hover,
 .rating > label:hover ~ input:checked ~ label, 
 .rating > input:checked ~ label:hover ~ label { color: #FFED85;  } 
+
 .modal {
     display: none; /* Hidden by default */
     position: fixed; /* Stay in place */
@@ -167,14 +169,27 @@ div .rating {
 th{
   color:white;
 }
+.myBtn{
+      background-color: #4CAF50; /* Green */
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+
+}
 </style>
 
 <body>
 <div id="Oslo" class="tabcontent">
 </div>
 
-<button class="tablink" onclick="location.href='thumbnails.html'" id="defaultOpen">Home</button>
-<button class="tablink" onclick="location.href='stream.html'">Thumbnails</button>
+<button class="tablink" onclick="location.href='home.html'" id="defaultOpen">Home</button>
+<button class="tablink" onclick="location.href='stats.html'">Stats</button>
 <button class="tablink" onclick="location.href='account.html'">Account</button>
 <div class="header">
 <br>
@@ -201,7 +216,7 @@ th{
 </table>
 <br>
 <br>
-<button class="button" onclick="location.href='thumbnails.html'">Go to stream</button>
+<button class="myBtn" onclick="location.href='thumbnails.html'">Go to stream</button>
 
 <script type="text/javascript">
     var para = parseURLParams(window.location.href);
@@ -215,7 +230,7 @@ th{
     lookupStreamer();
 </script>
 <!-- Trigger/Open The Modal -->
-<button id="myBtn">Reivew</button>
+<button id="myBtn" class="myBtn">Reivew</button>
 
 <!-- The Modal -->
 <div id="myModal" class="modal">
@@ -223,7 +238,7 @@ th{
   <!-- Modal content -->
   <div class="modal-content">
     <span class="close">&times;</span>
-    <p>Raiting
+    <p>Rating
     <id = "rating">
 <fieldset class="rating">
     <input type="radio" id="star5" name="rating" value="5" /><label class = "full" for="star5" title="Extreamly helpful - 5 stars"></label>
